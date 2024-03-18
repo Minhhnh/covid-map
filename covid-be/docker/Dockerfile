@@ -29,7 +29,7 @@ RUN poetry install
 FROM python-base as development
 ENV FASTAPI_ENV=development
 
-EXPOSE 8088
+EXPOSE 9000
 
 WORKDIR $PYSETUP_PATH
 
@@ -39,14 +39,14 @@ COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 COPY . /app/
 WORKDIR /app
 
-RUN poetry run pytest -v
+# RUN poetry run pytest -v
 
-CMD ["hypercorn", "app.main:app", "--worker-class", "trio", "--bind", "0.0.0.0:8088", "--workers", "4"]
+CMD ["hypercorn", "app.main:app", "--bind", "0.0.0.0:9000", "--workers", "1"]
 
 FROM python-base as production
 ENV FASTAPI_ENV=production
 
-EXPOSE 8088
+EXPOSE 9000
 
 WORKDIR $PYSETUP_PATH
 
@@ -56,6 +56,6 @@ COPY --from=builder-base $PYSETUP_PATH $PYSETUP_PATH
 COPY . /app/
 WORKDIR /app
 
-RUN poetry run pytest -v
+# RUN poetry run pytest -v
 
-CMD ["hypercorn", "app.main:app", "--worker-class", "trio", "--bind", "0.0.0.0:{{cookiecutter.port}}", "--workers", "8"]
+CMD ["hypercorn", "app.main:app", "--bind", "0.0.0.0:9000", "--workers", "1"]

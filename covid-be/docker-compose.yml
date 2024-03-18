@@ -2,43 +2,42 @@ version: "3.9"
 
 services:
   backend-app:
-    container_name: {{cookiecutter.project_slug}}-backend-app
+    container_name: covid-app
     build:
       context: .
       dockerfile: docker/Dockerfile
     restart: always
     depends_on:
-      - mongodb
+      - database
     ports:
-      - "{{cookiecutter.port}}:{{cookiecutter.port}}"
+      - "9000:9000"
     healthcheck:
-      test: [ "CMD-SHELL", "curl http://0.0.0.0:{{cookiecutter.port}}/" ]
+      test: [ "CMD-SHELL", "curl http://0.0.0.0:9000/" ]
       interval: 60s
       timeout: 5s
       retries: 5
     networks:
       - backend-network
 
-  mongodb:
-    image: mongo
-    container_name: {{cookiecutter.project_slug}}-mongodb
-    ports:
-      - "27017:27017"
+  database:
+    image: postgis/postgis
+    container_name: postgis
     restart: always
-    healthcheck:
-      test: echo 'db.runCommand("ping").ok' | mongosh localhost:27017/test --quiet
-      interval: 10s
-      timeout: 5s
-      retries: 5
-    env_file:
-      - .env
     volumes:
-      - mongodb-volume:/data/db
+        - covid_postgis_data:/var/lib/postgresql/data
+        - ./postgis/init:/docker-entrypoint-initdb.d
+        - ./postgis:/home
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=covid
+    ports:
+        - 5433:5432
     networks:
       - backend-network
 
 volumes:
-  mongodb-volume:
+  covid_postgis_data:
 
 networks:
   backend-network:

@@ -29,6 +29,7 @@ from app.core.constant import SQLALCHEMY_DATABASE_URL
 from app.logger.logger import custom_logger
 
 custom_logger.info("Connecting PostgreSQL Database.")
+custom_logger.info(SQLALCHEMY_DATABASE_URL)
 
 engine = create_engine(
     SQLALCHEMY_DATABASE_URL,
