@@ -4,6 +4,7 @@ provider "aws" {
 resource "aws_security_group" "public_security_group" {
   name        = "public_security_group"
   description = "Allow SSH, HTTP, HTTPS, Postgres inbound traffic"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 22
@@ -39,6 +40,7 @@ resource "aws_security_group" "public_security_group" {
 resource "aws_security_group" "private_security_group" {
   name        = "private_security_group"
   description = "Allow HTTP, MySQL inbound traffic"
+  vpc_id      = var.vpc_id
 
   ingress {
     from_port   = 80

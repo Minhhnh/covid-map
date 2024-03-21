@@ -22,3 +22,8 @@ variable "ec2_security_group_ids" {
   type     = list(string)
   nullable = false
 }
+variable "subnet_id" {
+  type        = string
+  description = "The subnet ID to launch in"
+  nullable    = false
+}

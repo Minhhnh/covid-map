@@ -24,3 +24,24 @@ variable "amis" {
     "ap-southeast-1" : "ami-06c4be2792f419b7b"
   }
 }
+
+variable "cidr_block" {
+  type     = string
+  nullable = false
+}
+variable "availability_zone_1" {
+  type     = string
+  nullable = false
+}
+variable "availability_zone_2" {
+  type     = string
+  nullable = false
+}
+variable "public_subnet_ips" {
+  type     = list(string)
+  nullable = false
+}
+variable "private_subnet_ips" {
+  type     = list(string)
+  nullable = false
+}
