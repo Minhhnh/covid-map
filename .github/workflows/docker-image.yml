@@ -10,9 +10,9 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      PROD_SSH_USER: ${{ secrets.PROD_SSH_USER }}
-      PROD_SSH_HOST: ${{ secrets.PROD_SSH_HOST }}
-      SOURCE_DIRECTORY: "~/covid"
+      PROD_SSH_USER: ${{ vars.PROD_SSH_USER }}
+      PROD_SSH_HOST: ${{ vars.PROD_SSH_HOST }}
+      SOURCE_DIRECTORY: "~/covid-map"
 
     steps:
       - name: Checkout repository
@@ -20,7 +20,7 @@ jobs:
 
       - name: Create ENV
         env:
-          PROD_SSH_KEY: ${{ secrets.PROD_SSH_KEY }}
+          PROD_SSH_KEY: ${{ vars.PROD_SSH_KEY }}
           PROD_ENV: ${{ vars.PROD_ENV }}
         run: |
           echo -e "$PROD_ENV" >> covid-be/.env

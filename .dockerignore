@@ -1,0 +1,14 @@
+node_modules
+npm-debug.log
+build
+.dockerignore
+**/.git
+**/.DS_Store
+**/node_modules
+
+
+.venv
+venv
+.idea
+!app/resources/.keep
+app/resources/*/*
