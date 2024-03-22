@@ -8,6 +8,7 @@ import { GeoJsonLayer } from '@deck.gl/layers';
 import { Map, Popup } from 'react-map-gl/maplibre';
 // import type {MapRef} from 'react-map-gl/maplibre';
 import maplibregl from 'maplibre-gl';
+import "maplibre-gl/dist/maplibre-gl.css";
 
 // 初期表示位置などを指定
 const initialViewState = {
@@ -32,7 +33,7 @@ class App extends React.Component {
   // コンポーネントがマウントされてから動作するメソッド
   // APIにアクセスしてデータを取得しておく
   componentDidMount() {
-    fetch("http://0.0.0.0:8000/api/admin/covid/geojson?limit=10000&offset=0")
+    fetch("http://0.0.0.0:9000/api/admin/covid/geojson?limit=10000&offset=0")
       .then(res => res.json())
       .then(
         (result) => {
@@ -68,25 +69,6 @@ class App extends React.Component {
       )
     }
   }
-  // renderPopup() {
-  //   const { hoveredObject, hoveredCoords } = this.state;
-  //   console.log("hoveredObject", hoveredObject);
-  //   console.log("hoveredCoords", hoveredCoords);
-  //   if (hoveredObject !== null)
-  //     return (
-  //       hoveredObject && (
-  //         <Popup
-  //           longitude={hoveredObject.properties.lon}
-  //           latitude={hoveredObject.propertiess.lat}
-  //           closeButton={true}
-  //           closeOnClick={true}
-  //           offsetTop={-30}
-  //         >
-  //           <div>You hovered over this point!</div>
-  //         </Popup>
-  //       )
-  //     );
-  // }
 
   // レンダリング用のメソッド
   render() {
@@ -99,8 +81,8 @@ class App extends React.Component {
         getPointRadius: d => 2000,
         getFillColor: d => [245, 36, 36, 150],
         pickable: true,
-        // onHover: info => this.setState({ hoveredObject: info.object }),
-        onclick: info => this.setState({ hoveredObject: info.object }),
+        onHover: info => this.setState({ hoveredObject: info.object }),
+        // onclick: info => this.setState({ hoveredObject: info.object }),
       }),
     ];
 

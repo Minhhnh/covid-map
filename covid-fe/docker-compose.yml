@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  frontend-app:
+    container_name: covid_fe
+    build: .
+    restart: always
+    volumes:
+      - node_modules:/usr/src/app/node_modules
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test: [ "CMD-SHELL", "curl http://0.0.0.0:3000/" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - covid_network
+
+networks:
+  covid_network:
+    name: covid_network
+    driver: bridge
+
+volumes:
+  node_modules:
