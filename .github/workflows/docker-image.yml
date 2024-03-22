@@ -33,4 +33,4 @@ jobs:
 
       - name: Deploy to server
         run: |
-          sudo ssh -i id_rsa.txt -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $PROD_SSH_USER@$PROD_SSH_HOST "cd $SOURCE_DIRECTORY && COMPOSE_HTTP_TIMEOUT=2000 docker-compose up --build -d"
+          sudo ssh -i id_rsa.txt -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null $PROD_SSH_USER@$PROD_SSH_HOST "cd $SOURCE_DIRECTORY && COMPOSE_HTTP_TIMEOUT=2000 docker compose up --build -d"

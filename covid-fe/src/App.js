@@ -33,7 +33,7 @@ class App extends React.Component {
   // コンポーネントがマウントされてから動作するメソッド
   // APIにアクセスしてデータを取得しておく
   componentDidMount() {
-    fetch("http://0.0.0.0:9000/api/admin/covid/geojson?limit=10000&offset=0")
+    fetch("http://52.69.101.72:9000/api/admin/covid/geojson?limit=1000&offset=0")
       .then(res => res.json())
       .then(
         (result) => {
