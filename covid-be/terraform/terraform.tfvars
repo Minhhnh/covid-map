@@ -1,4 +1,4 @@
-instance_type       = "t2.micro"
+instance_type       = "t3.small"
 public_key          = "./keypair/udemy-key.pub"
 region              = "ap-northeast-1"
 availability_zone_1 = "ap-northeast-1c"
